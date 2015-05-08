@@ -1003,7 +1003,10 @@
                 $sql .= ' ON (' . $a_jt['col1'] . self::DB_EQUALS . $a_jt['col2'];
                 foreach ($a_jt['criterias'] as $a_crit) {
                     $sql .= ' AND ';
-                    $a_crit = new Criterion($a_crit[0], $a_crit[1]);
+                    if(!($a_crit instanceof Criterion))
+                    {
+                	$a_crit = new Criterion($a_crit[0], $a_crit[1]);
+                    }
                     $sql .= $this->_parseCriterion($a_crit);
                 }
                 $sql .= ')';
